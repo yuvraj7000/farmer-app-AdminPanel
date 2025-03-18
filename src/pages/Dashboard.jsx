@@ -18,6 +18,7 @@ const Dashboard = () => {
       <h1 className="text-2xl font-bold">Admin Dashboard</h1>
         <div className="flex flex-wrap">
         <NavigationButton buttonName="Schemes" navigation="/schemes"/>
+        <NavigationButton buttonName="Crops" navigation="/crops"/>
             </div>
     </div>
   );
