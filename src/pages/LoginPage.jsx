@@ -9,15 +9,10 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    navigate("/dashboard");
-    // try {
-    //   const res = await axios.post("http://localhost:5000/api/admin/login", { email, password });
-    //   localStorage.setItem("token", res.data.token);
-    //   navigate("/dashboard");
-    // } catch (err) {
-    //   setError("Invalid Credentials");
-    // }
+    e.preventDefault(); // Prevent the form from reloading the page
+    console.log("Login button clicked"); // Debugging
+  navigate("/dashboard"); // Navigate to the dashboard
+   
   };
 
   return (
@@ -41,7 +36,9 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button className="bg-blue-500 text-white w-full p-2">Login</button>
+        <button type="submit" className="bg-blue-500 text-white w-full p-2">
+          Login
+        </button>
       </form>
     </div>
   );

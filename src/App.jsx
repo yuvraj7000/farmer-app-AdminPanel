@@ -15,7 +15,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
-      <Route element={<PrivateRoute />}>
+      {/* <Route element={<PrivateRoute />}> */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/schemes" element={<Schemes />} />
         <Route path="/addSchemes" element={<AddSchemes />} />
@@ -25,7 +25,7 @@ const App = () => {
         <Route path="/addCrop" element={<AddCrop />} />
         <Route path="/UpdateCrop" element={<UpdateCrop />} />
         <Route path="/editCropPara/:name" element={<EditCropPara />} />
-      </Route>
+      {/* </Route> */}
     </Routes>
   );
 };
