@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Plus, Trash, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { indianLanguages as languages } from '../utils/languages';
+import DraggableImagePicker from '../components/DraggableImagePicker';
 
 
 const AddCrop = () => {
@@ -18,18 +20,18 @@ const AddCrop = () => {
   ]);
 
   // Available languages for dropdown
-  const languages = [
-    { code: 'en', name: 'English' },
-    { code: 'es', name: 'Spanish' },
-    { code: 'fr', name: 'French' },
-    { code: 'de', name: 'German' },
-    { code: 'it', name: 'Italian' },
-    { code: 'pt', name: 'Portuguese' },
-    { code: 'zh', name: 'Chinese' },
-    { code: 'ja', name: 'Japanese' },
-    { code: 'hi', name: 'Hindi' },
-    { code: 'ar', name: 'Arabic' }
-  ];
+  // const languages = [
+  //   { code: 'en', name: 'English' },
+  //   { code: 'es', name: 'Spanish' },
+  //   { code: 'fr', name: 'French' },
+  //   { code: 'de', name: 'German' },
+  //   { code: 'it', name: 'Italian' },
+  //   { code: 'pt', name: 'Portuguese' },
+  //   { code: 'zh', name: 'Chinese' },
+  //   { code: 'ja', name: 'Japanese' },
+  //   { code: 'hi', name: 'Hindi' },
+  //   { code: 'ar', name: 'Arabic' }
+  // ];
 
   const handleParagraphChange = (index, field, value) => {
     const updatedParagraphs = [...paragraphs];
@@ -69,7 +71,7 @@ const AddCrop = () => {
     }
     
     try {
-      const response = await axios.post('http://localhost:4000/api/v1/crop/add', {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND}/api/v1/crop/add`, {
         name: cropName,
         image_url: imageUrl,
         paragraphs: paragraphs
@@ -236,6 +238,7 @@ const AddCrop = () => {
           </div>
         </form>
       </div>
+      <DraggableImagePicker/>
     </div>
   );
 };

@@ -19,7 +19,7 @@ const Crops = () => {
   const fetchCrops = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:4000/api/v1/crop/all');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND}/api/v1/crop/all`);
       setCrops(response.data.crops);
       setError(null);
     } catch (err) {
@@ -32,7 +32,7 @@ const Crops = () => {
 
   const handleDeleteCrop = async (name) => {
     try {
-      await axios.post(`http://localhost:4000/api/v1/crop/delete`,{name});
+      await axios.post(`${import.meta.env.VITE_BACKEND}/api/v1/crop/delete`,{name});
       // Update the state to remove the deleted crop
       setCrops(crops.filter(crop => crop.name !== name));
       setOpenMenuId(null);

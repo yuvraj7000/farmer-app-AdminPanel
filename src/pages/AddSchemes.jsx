@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { indianLanguages } from '../utils/languages';
+import DraggableImagePicker from '../components/DraggableImagePicker';
 
 const AddSchemes = () => {
   const [formData, setFormData] = useState({
@@ -76,7 +78,7 @@ const AddSchemes = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:4000/api/v1/schemes/add', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/schemes/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -270,9 +272,12 @@ const AddSchemes = () => {
                   className="w-full p-2 border rounded"
                   required
                 >
-                  <option value="en">English</option>
-                  <option value="hi">Hindi</option>
-                  <option value="tn">Tamil</option>
+                  {indianLanguages.map((language) => (
+                    <option key={language.code} value={language.code}>
+                      {language.name}
+                    </option>
+                  ))}
+
                 </select>
               </div>
 
@@ -423,6 +428,7 @@ const AddSchemes = () => {
           </button>
         </div>
       </form>
+      <DraggableImagePicker/>
     </div>
   );
 };

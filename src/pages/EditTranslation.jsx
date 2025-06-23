@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { indianLanguages } from '../utils/languages';
 
 const EditTranslation = () => {
   const { schemeId } = useParams();
@@ -12,7 +13,7 @@ const EditTranslation = () => {
   useEffect(() => {
     const fetchTranslations = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/v1/schemes/getTranslationSchemes', {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/schemes/getTranslationSchemes`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -62,7 +63,7 @@ const EditTranslation = () => {
 
   const handleUpdateTranslation = async (translation) => {
     try {
-      const response = await fetch('http://localhost:4000/api/v1/schemes/updateTranslation', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/schemes/updateTranslation`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -110,8 +111,8 @@ const EditTranslation = () => {
         {translations.map((translation, langIndex) => (
           <div key={translation.id} className="border p-4 rounded-lg">
             <h3 className="text-lg font-semibold mb-4">
-              {translation.language_code.toUpperCase()} Translation
-            </h3>
+  {indianLanguages.find(lang => lang.code === translation.language_code)?.name || translation.language_code.toUpperCase()} Translation
+</h3>
 
             <div className="space-y-4">
               <div>

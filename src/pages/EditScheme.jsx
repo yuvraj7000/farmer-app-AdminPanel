@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import DraggableImagePicker from '../components/DraggableImagePicker';
 
 const EditScheme = () => {
   const { id } = useParams();
@@ -23,7 +24,7 @@ const EditScheme = () => {
   useEffect(() => {
     const fetchScheme = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/api/v1/schemes/get`, {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/schemes/get`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -64,7 +65,7 @@ const EditScheme = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:4000/api/v1/schemes/updateScheme', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/schemes/updateScheme`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -238,6 +239,7 @@ const EditScheme = () => {
           </button>
         </div>
       </form>
+      <DraggableImagePicker/>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { useState, useEffect, memo, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { MoreVertical, Plus } from 'lucide-react';
 import axios from 'axios';
+import { indianLanguages } from '../utils/languages';
 
 const Paragraph = memo(({ 
     para,
@@ -106,7 +107,7 @@ const EditCropPara = () => {
         setIsLoading(true);
         setError('');
         try {
-            const response = await axios.post(`http://localhost:4000/api/v1/crop/get`, {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND}/api/v1/crop/get`, {
                 name,
                 language_code: languageCode
             });
@@ -129,7 +130,7 @@ const EditCropPara = () => {
         setIsLoading(true);
         setError('');
         try {
-            await axios.post('http://localhost:4000/api/v1/crop/update_para', {
+            await axios.post(`${import.meta.env.VITE_BACKEND}/api/v1/crop/update_para`, {
                 crop_name: name,
                 paragraph_title: originalTitle,
                 language_code: languageCode,
@@ -151,7 +152,7 @@ const EditCropPara = () => {
             setIsLoading(true);
             setError('');
             try {
-                await axios.post('http://localhost:4000/api/v1/crop/delete_para', {
+                await axios.post(`${import.meta.env.VITE_BACKEND}/api/v1/crop/delete_para`, {
                     crop_name: name,
                     paragraph_title: paragraphTitle,
                     language_code: languageCode
@@ -175,7 +176,7 @@ const EditCropPara = () => {
         setIsLoading(true);
         setError('');
         try {
-            await axios.post('http://localhost:4000/api/v1/crop/add_para', {
+            await axios.post(`${import.meta.env.VITE_BACKEND}/api/v1/crop/add_para`, {
                 crop_name: name,
                 language_code: languageCode,
                 para_name: newParaTitle,
@@ -194,11 +195,11 @@ const EditCropPara = () => {
     }
 
     return (
-        <div className='container mx-auto p-4 max-w-4xl'>
+        <div className='container mx-auto p-4 max-w-4xl relative'>
             <h1 className='text-2xl font-bold mb-6'>Edit Crop Paragraph</h1>
             
-            {error && <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">{error}</div>}
-            {isLoading && <div className="mb-4 p-3 bg-blue-100 text-blue-700 rounded">Loading...</div>}
+            {error && <div className="fixed top-0 w-1/2 text-center ml-16 mb-4 p-10 bg-red-100 text-red-700 rounded">{error}</div>}
+            {isLoading && <div className=" fixed top-0 w-1/2 text-center ml-16 mb-4 p-10 bg-blue-100 text-blue-700 rounded">Loading...</div>}
 
             <div className='mb-4'>
                 <label htmlFor="language-select" className='block mb-2 font-medium'>Select Language: </label>
@@ -208,11 +209,13 @@ const EditCropPara = () => {
                     onChange={(e) => setLanguageCode(e.target.value)}
                     className="border p-2 rounded w-full"
                     disabled={isLoading}
-                >
-                    <option value="en">English</option>
-                    <option value="hi">Hindi</option>
-                    <option value="es">Spanish</option>
-                    <option value="fr">French</option>
+                > 
+                {
+                    indianLanguages.map(lang => (
+                        <option key={lang.code} value={lang.code}>{lang.name}</option>
+                    ))
+                }
+
                 </select>
             </div>
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import DraggableImagePicker from '../components/DraggableImagePicker';
 
 const UpdateCrop = () => {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const UpdateCrop = () => {
     }
     
     try {
-      const response = await axios.post('http://localhost:4000/api/v1/crop/update', {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND}/api/v1/crop/update`, {
         old_name: oldName,
         new_name: newName,
         image_url: imageUrl
@@ -142,6 +143,7 @@ const UpdateCrop = () => {
           </div>
         </form>
       </div>
+      <DraggableImagePicker/>
     </div>
   );
 };
