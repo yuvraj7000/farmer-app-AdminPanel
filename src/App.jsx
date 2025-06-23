@@ -3,7 +3,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Schemes from "./pages/Schemes.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
-import AddSchemes from "./pages/addSchemes.jsx";
+import AddSchemes from "./pages/AddSchemes.jsx";
 import EditScheme from "./pages/EditScheme.jsx";
 import EditTranslation from "./pages/EditTranslation.jsx";
 import Crops from "./pages/Crops.jsx";
